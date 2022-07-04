@@ -25,13 +25,15 @@ const Navigation = () => {
 
                 <div className='nav-links-container'>
                   <Link className='nav-link' to='/shop'>SHOP</Link>
-                    {
-                        currentUser?
-                            <span className='nav-link' onClick={signOutHandler}>SIGN OUT</span>
-                            :
-                            <Link className='nav-link' to='/auth'>SIGN IN</Link>
-                    }
-                    <CartIcon/>
+
+                  {
+                    currentUser?
+                        <span className='nav-link' onClick={signOutHandler}>SIGN OUT</span>
+                        :
+                        <Link className='nav-link' to='/auth'>SIGN IN</Link>
+                  }
+
+                  <CartIcon/>
                 </div>
                 { isCartOpen && <CartDropdown/>}
             </div>
