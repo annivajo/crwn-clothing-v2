@@ -22,7 +22,9 @@ const SignUpForm = () => {
     }
 
     const handleSubmit = async(event) => {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
 
         if(password !== confirmPassword){
             alert("password don't match");
@@ -38,8 +40,6 @@ const SignUpForm = () => {
         } catch(error){
             console.log("user creation: ",error);
         }
-
-
     }
 
     const handleChange = (event) => {
