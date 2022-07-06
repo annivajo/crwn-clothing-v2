@@ -62,10 +62,10 @@ export const getCategoriesAndDocuments = async () => {
 }
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
-    console.log("createUserDocumentFromAuth:", userAuth)
+    console.log("createUserDocumentFromAuth:", userAuth);
+    if (!userAuth) return;
     const userDocRef = doc(db, 'users', userAuth.uid);
     const userShapshot = await getDoc(userDocRef);
-
     if (!userShapshot.exists()) {
         const {displayName, email} = userAuth;
         const createdAt = new Date();

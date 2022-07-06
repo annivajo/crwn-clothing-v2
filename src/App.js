@@ -5,10 +5,11 @@ import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-import {useEffect} from "@types/react";
+
 import {createUserDocumentFromAuth, onAuthStateChangedLister} from "./utils/firebase.utils";
 import {setCurrentUser} from "./store/user/user.action";
 import {useDispatch} from "react-redux";
+import {useEffect} from "react";
 
 
 const App = () => {
@@ -16,10 +17,13 @@ const App = () => {
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChangedLister((user)=>{
+            console.log("USER:", user);
             if(user){
-                createUserDocumentFromAuth(user);
+                createUserDocumentFromAuth(user)
+                    .then(dispatch(setCurrentUser(user)));
+
             }
-            dispatch(setCurrentUser(user));
+
         });
         return unsubscribe;
     },[])
