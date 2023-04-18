@@ -30,6 +30,7 @@ const SignInForm = () => {
 
     const handleSubmit = async(event) => {
         event.preventDefault();
+        console.log("handleSubmit SIGN IN")
 
         try {
             //await signInAuthUserWithEmailAndPassword(email, password);
@@ -45,7 +46,7 @@ const SignInForm = () => {
                     alert ("user does not exist")
                     break;
                 default:
-                    console.log(error)
+                    console.log("error when SIGN IN: ",error)
             }
 
         }

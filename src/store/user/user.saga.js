@@ -7,6 +7,7 @@ import { GoogleAuthProvider } from 'firebase/auth';
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
     try {
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
+        console.log("userSnapshot=", userSnapshot);
         yield put(signInSuccess({id: userSnapshot.id, ...userSnapshot.data()}))
     } catch(error) {
         yield put(signInFailed(error));
@@ -35,6 +36,7 @@ export function* signInWithGoogle() {
 
 export function* signInWithEmail( {payload: {email, password}}){
     try{
+        console.log("signInWithEmail");
         const {user} = yield call(signInAuthUserWithEmailAndPassword, email, password);
         yield call(getSnapshotFromUserAuth, user)
     }catch(error){
@@ -44,6 +46,7 @@ export function* signInWithEmail( {payload: {email, password}}){
 
 export function* signUp({payload: {email, password, displayName}}) {
     try{
+        console.log("EEEEEEEEEEEEE");
         const {user} = yield call(createAuthUserWithEmailAndPassword, email, password);
         yield put(signUpSuccess(user, {displayName}))
     } catch(error) {
@@ -74,6 +77,7 @@ export function* onGoogleSignInStart() {
 }
 
 export function* onEmailSignInStart(){
+    console.log("onEmailSignInStart SAGA");
     yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START,signInWithEmail);
 }
 
