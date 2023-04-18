@@ -48,7 +48,7 @@ const PaymentForm = () => {
             }
           });
 
-          setIsProcessingPayment(true);
+          setIsProcessingPayment(false);
 
           if (paymentResult.error){
             alert(paymentResult.error.message)
