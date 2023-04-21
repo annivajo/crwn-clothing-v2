@@ -7,7 +7,7 @@ import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 
 import {createUserDocumentFromAuth, onAuthStateChangedLister, getCurrentUser} from "./utils/firebase.utils";
-import {setCurrentUser, checkUseSession} from "./store/user/user.action";
+import {setCurrentUser, checkUserSession} from "./store/user/user.action";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 
@@ -33,7 +33,7 @@ const App = () => {
     // },[])
 
      useEffect(()=> {
-        dispatch(checkUseSession());
+        dispatch(checkUserSession());
     },[])
 
   return (

@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import FormInput from "../form-input/form-input.component";
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import './sign-in-form.styles.scss';
-import {goodleSignInStart, emailSignInStart} from '../../store/user/user.action';
+import {googleSignInStart, emailSignInStart} from '../../store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -21,7 +21,7 @@ const SignInForm = () => {
 
     const signInWithGoogle = async()=> {
        // await signInWithGooglePopup();
-       dispatch(goodleSignInStart());
+       dispatch(googleSignInStart());
     }
 
     const resetFormFields = () => {
