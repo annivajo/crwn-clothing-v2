@@ -1,6 +1,6 @@
-import { useState} from "react";
+import { useState, FormEvent, ChangeEvent} from "react";
 import {useDispatch} from "react-redux";
-
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import Button, {BUTTON_TYPE_CLASSES} from "../button/button.component";
 import './sign-in-form.styles.scss';
@@ -28,7 +28,7 @@ const SignInForm = () => {
         setFormFields(defaultFormFields);
     }
 
-    const handleSubmit = async(event) => {
+    const handleSubmit = async(event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log("handleSubmit SIGN IN")
 
@@ -38,21 +38,21 @@ const SignInForm = () => {
 
             resetFormFields();
         } catch(error){
-            switch (error.code){
-                case 'auth/wrong-password':
+            switch ( (error as AuthError).code){
+                case AuthErrorCodes.INVALID_PASSWORD:
                     alert ("wrong password");
                     break;
-                case 'auth/user-not-found':
+                case AuthErrorCodes.NULL_USER:
                     alert ("user does not exist")
                     break;
                 default:
-                    console.log("error when SIGN IN: ",error)
-            }
-
+                    console.log("error when SIGN IN: ", (error as AuthError).code)
+            }    
+        
         }
     }
 
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
         console.log("name:", name);
         console.log("value:", value);
